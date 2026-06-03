@@ -1,0 +1,61 @@
+###
+
+### 1. Einen neuen Zug anlegen
+POST http://localhost:8080/api/zuege
+Content-Type: application/json
+
+{
+  "name": "ICE 720"
+}
+
+###
+
+### 2. Alle Züge abrufen (um die ID zu prüfen)
+GET http://localhost:8080/api/zuege
+Accept: application/json
+
+###
+
+### 3. Einen Waggon zu einem Zug hinzufügen
+# Ersetze die '1' in der URL durch die tatsächliche ID deines Zuges
+POST http://localhost:8080/api/zuege/1/waggons
+Content-Type: application/json
+
+{
+  "bezeichnung": "Waggon A1",
+  "plaetze": 80
+}
+
+###
+
+### 4. Einen neuen Fahrgast anlegen
+# (Hierfür müsstest du noch einen FahrgastController bauen)
+POST http://localhost:8080/api/fahrgaeste
+Content-Type: application/json
+
+{
+  "name": "Max Mustermann"
+}
+
+###
+
+### 5. Ein Ticket kaufen (Platz im Waggon verringern)
+# Nutzt die Parameter: waggonId, fahrgastId und anzahl
+POST http://localhost:8080/api/tickets/buy?waggonId=1&fahrgastId=1&anzahl=1
+Accept: application/json
+
+###
+
+### 6. Status-Check: Prüfen, ob die Plätze im Waggon weniger geworden sind
+# Wenn du die Züge abrufst, sollte die Platzanzahl im Waggon nun niedriger sein
+GET http://localhost:8080/api/zuege
+Accept: application/json
+
+###
+
+### 7. Löschen eines Zuges der id: 6
+DELETE http://localhost:8080/api/zuege/6
+Accept: application/json
+
+###
+
