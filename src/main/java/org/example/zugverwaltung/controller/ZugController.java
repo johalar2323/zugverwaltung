@@ -36,8 +36,8 @@ public class ZugController {
         return zugService.alleWaggons();
     }
 
-    // POST /api/zuege/{zugId}/waggons – Waggon zu Zug hinzufügen
-    @PostMapping("/{zugId}/waggons")
+    // POST /api/zuege/waggons/{zugId} – Waggon zu Zug hinzufügen
+    @PostMapping("waggons/{zugId}")
     public String addWaggon(@PathVariable Long zugId, @RequestBody Waggon waggon) throws Exception {
         Zug zug = zugService.zugById(zugId);
         if (zug == null) {
@@ -58,8 +58,8 @@ public class ZugController {
         }
     }
 
-    // DELETE /api/zuege/{waggonId}/waggons – Waggon löschen
-    @DeleteMapping("/{waggonId}/waggons")
+    // DELETE /api/zuege/waggons/{waggonId} – Waggon löschen
+    @DeleteMapping("waggons/{waggonId}")
     public String deleteWaggon(@PathVariable Long waggonId) {
         try {
             zugService.waggonLoeschen(waggonId);

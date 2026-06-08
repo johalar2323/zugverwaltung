@@ -1,19 +1,18 @@
 package org.example.zugverwaltung.service;
 
 import com.j256.ormlite.dao.Dao;
-import org.example.zugverwaltung.model.Bahnhof;
 import org.example.zugverwaltung.model.Linie;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Service
 public class LinieService {
     private final Dao<Linie, Long> linieDao;
-    private final Dao<Bahnhof, Long> bhfDao;
 
-    public LinieService(Dao<Linie, Long> linieDao, Dao<Bahnhof, Long> bhfDao) {
+    public LinieService(Dao<Linie, Long> linieDao) {
         this.linieDao = linieDao;
-        this.bhfDao = bhfDao;
     }
 
     public void linieAnlegen(Linie linie) throws SQLException {
@@ -28,23 +27,7 @@ public class LinieService {
         return linieDao.queryForAll();
     }
 
-    public void linieById(Long id) throws SQLException {
-        linieDao.queryForId(id);
-    }
-
-    public void bahnhofAnlegen(Bahnhof bahnhof) throws SQLException {
-        bhfDao.create(bahnhof);
-    }
-
-    public void bahnhofLoeschen(Long id) throws SQLException {
-        bhfDao.deleteById(id);
-    }
-
-    public List<Bahnhof> alleBahnhoefe() throws SQLException {
-        return bhfDao.queryForAll();
-    }
-
-    public void bahnhofById(Long id) throws SQLException {
-        bhfDao.queryForId(id);
+    public Linie linieById(Long id) throws SQLException {
+        return linieDao.queryForId(id);
     }
 }

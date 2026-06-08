@@ -18,6 +18,10 @@ public class Zug {
     @JsonIgnore
     private ForeignCollection<Waggon> waggons;
 
+    @DatabaseField(foreign = true, columnName = "linien_id")
+    @JsonIgnore
+    private Linie linie;
+
     public Zug() {
     }
 
@@ -54,12 +58,21 @@ public class Zug {
         this.id = id;
     }
 
+    public Linie getLinie() {
+        return linie;
+    }
+
+    public void setLinie(Linie linie) {
+        this.linie = linie;
+    }
+
     @Override
     public String toString() {
         return "Zug{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", waggons=" + waggons +
+                ", linie=" + linie +
                 '}';
     }
 }
