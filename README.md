@@ -29,16 +29,15 @@ Ein Spring Boot Backend-System zur Verwaltung von Zügen, Waggons, Linien, Bahnh
 
 ## Datenbankmodell
 
-```
-Linie
- ├── Zug (1:n)
- │    └── Waggon (1:n)
- └── Bahnhof (1:n)
-
-Fahrkarte
- ├── Zug
- ├── Waggon
- └── Fahrgast
+```mermaid
+erDiagram
+    Linie ||--o{ Bahnhof : "linie_id"
+    Linie ||--o{ Zug : "linie_id"
+    Zug ||--o{ Waggon : "zug_id"
+    Waggon ||--o{ Fahrgast : "waggon_id"
+    Fahrkarte }o--|| Zug : "zug_id"
+    Fahrkarte }o--|| Waggon : "waggon_id"
+    Fahrkarte }o--|| Fahrgast : "fahrgast_id"
 ```
 
 ---
