@@ -10,10 +10,18 @@ Ein Spring Boot Backend-System zur Verwaltung von Zügen, Waggons, Linien, Bahnh
 | `main`   | Pflichtenheft (`Pflichtenheft_Zugverwaltung.pdf`) |
 | `master` | Vollständiger Quellcode des Projekts              |
 
-> **Hinweis:** Der Quellcode befindet sich im Branch `master`. Vor dem Setup sicherstellen, dass der richtige Branch ausgecheckt ist:
-> 
-> ```bash
-> git clone https://github.com/DEIN-USERNAME/zugverwaltung.git
-> cd zugverwaltung
-> git checkout master
-> ```
+---
+
+Achtung: In diesem Repository befindet sich der aktuelle Code im Branch `master` – im Default-Branch `main` liegt nur das Pflichtenheft
+
+**Beim ersten Klonen:**
+```
+git clone -b master https://github.com/johalar2323/zugverwaltung.git
+```
+
+**Wenn das Repo bereits geklont ist:**
+```
+git fetch origin
+git checkout master
+git pull origin master
+```
