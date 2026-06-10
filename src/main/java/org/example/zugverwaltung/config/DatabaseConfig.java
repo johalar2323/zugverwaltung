@@ -24,8 +24,7 @@ public class DatabaseConfig {
 
     @Bean
     public ConnectionSource connectionSource() throws Exception {
-        JdbcConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl, username, password, new MysqlDatabaseType());
-        return connectionSource;
+        return new JdbcConnectionSource(databaseUrl, username, password, new MysqlDatabaseType());
     }
 
     @Bean
@@ -50,15 +49,6 @@ public class DatabaseConfig {
     public Dao<Fahrkarte, Long> fahrkarteDao(ConnectionSource connectionSource) throws Exception {
         TableUtils.createTableIfNotExists(connectionSource, Fahrkarte.class);
         return DaoManager.createDao(connectionSource, Fahrkarte.class);
-//        try {
-//            dao.executeRaw("ALTER TABLE fahrkarten ADD COLUMN zug_id BIGINT");
-//        } catch (Exception ignored) {
-//        }
-//        try {
-//            dao.executeRaw("ALTER TABLE fahrkarten ADD COLUMN abfahrtszeit VARCHAR(255)");
-//        } catch (Exception ignored) {
-//        }
-//        return dao;
     }
 
     @Bean
