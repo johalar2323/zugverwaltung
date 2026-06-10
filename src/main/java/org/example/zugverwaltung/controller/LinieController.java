@@ -1,6 +1,7 @@
 package org.example.zugverwaltung.controller;
 
 import org.example.zugverwaltung.model.Linie;
+import org.example.zugverwaltung.model.Zug;
 import org.example.zugverwaltung.service.LinieService;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +26,14 @@ public class LinieController {
 
     // GET /api/linien/{id} - Linie mit {id}
     @GetMapping("/{id}")
-    public Linie getLinieById(@RequestBody Long id) throws SQLException {
+    public Linie getLinieById(@PathVariable Long id) throws SQLException {
         return linieService.linieById(id);
+    }
+
+    // GET /api/linien/zuege/{id} - alle Zuege von einer Linie
+    @GetMapping("/zuege/{id}")
+    public List<Zug> getAllZugen(@PathVariable Long id) throws SQLException {
+        return linieService.alleZugen(id);
     }
 
     // POST /api/linien - Linie anlegen
@@ -38,8 +45,8 @@ public class LinieController {
 
     // DELETE /api/linien - Linie mit der {id} löschen
     @DeleteMapping("/{id}")
-    public String deleteLinie(@RequestBody Long id) throws SQLException {
+    public String deleteLinie(@PathVariable Long id) throws SQLException {
         linieService.linieLoeschen(id);
-        return "Linie \"" + id + "\" erfolgreich gelöscht!";
+        return "Linie mit ID " + id + " erfolgreich gelöscht!";
     }
 }

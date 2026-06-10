@@ -2,6 +2,7 @@ package org.example.zugverwaltung.service;
 
 import com.j256.ormlite.dao.Dao;
 import org.example.zugverwaltung.model.Bahnhof;
+import org.example.zugverwaltung.model.Linie;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -29,5 +30,10 @@ public class BhfService {
 
     public Bahnhof bahnhofById(Long id) throws SQLException {
         return bhfDao.queryForId(id);
+    }
+
+    public void linieHinzufuegen(Bahnhof bhf, Linie linie) throws SQLException {
+        bhf.setLinie(linie);
+        bhfDao.update(bhf);
     }
 }

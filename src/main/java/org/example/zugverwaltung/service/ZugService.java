@@ -54,12 +54,17 @@ public class ZugService {
         return waggonDao.queryForAll();
     }
 
-    public void waggonHinzufuegen(Zug zug, Waggon waggon) throws Exception {
+    public void waggonHinzufuegen(Zug zug, Waggon waggon) throws SQLException {
         waggon.setZug(zug);
         waggonDao.createOrUpdate(waggon);
     }
 
     public void waggonLoeschen(Long id) throws SQLException {
         waggonDao.deleteById(id);
+    }
+
+    public void linieHinzufuegen(Zug zug, Linie linie) throws SQLException {
+        zug.setLinie(linie);
+        zugDao.update(zug);
     }
 }

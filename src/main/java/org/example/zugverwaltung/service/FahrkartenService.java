@@ -22,7 +22,6 @@ public class FahrkartenService {
     }
 
     public void fahrkarteKaufen(int anzahl, Zug zug, Waggon waggon, Fahrgast fahrgast, LocalDateTime abfahrtszeit) throws SQLException {
-
         if (waggon.getZug() == null || waggon.getZug().getId() != zug.getId()) {
             throw new SQLException("Waggon \"" + waggon.getBezeichnung()
                     + "\" gehört nicht zu Zug \"" + zug.getName() + "\"!");
@@ -43,4 +42,9 @@ public class FahrkartenService {
     public List<Fahrkarte> alleFahrkarten() throws SQLException {
         return fahrkartenDao.queryForAll();
     }
+
+    public void deleteFahrekarte(Long id) throws SQLException {
+        fahrkartenDao.deleteById(id);
+    }
+
 }

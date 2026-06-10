@@ -8,6 +8,7 @@ import org.example.zugverwaltung.service.FahrkartenService;
 import org.example.zugverwaltung.service.ZugService;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -54,9 +55,10 @@ public class TicketController {
 
     // POST /api/tickets/buy
     @PostMapping("/buy")
-    public String ticketKaufen(@RequestParam Long zugId, @RequestParam Long waggonId,
-                               @RequestParam Long fahrgastId, @RequestParam(defaultValue = "1") int anzahl, @RequestParam LocalDateTime abfahrtszeit) {
-
+    public String ticketKaufen(@RequestParam Long zugId, @RequestParam Long waggonId, @RequestParam Long fahrgastId,
+                               @RequestParam(defaultValue = "1") int anzahl,
+                               @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime abfahrtszeit) {
+        if (anzahl <= 0) return "Fehler: Anzahl muss größer als 0 sein!";
         try {
             Zug zug = zugService.zugById(zugId);
             Waggon waggon = waggonDao.queryForId(waggonId);
@@ -86,4 +88,13 @@ public class TicketController {
     public List<Fahrkarte> alleFahrkarten() throws SQLException {
         return fahrkartenService.alleFahrkarten();
     }
+
+    // DELETE /api/tickets/{id}
+    @DeleteMapping("/{id}")
+    public String ticketStornieren(@PathVariable Long id) throws SQLException {
+        fahrkartenService.deleteFahrekarte(id);
+        return "Fahrkarte \"" + id + "\" erfolgreich storniert!";
+    }
+
+
 }

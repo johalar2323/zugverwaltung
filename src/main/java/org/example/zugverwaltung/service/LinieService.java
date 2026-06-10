@@ -2,9 +2,11 @@ package org.example.zugverwaltung.service;
 
 import com.j256.ormlite.dao.Dao;
 import org.example.zugverwaltung.model.Linie;
+import org.example.zugverwaltung.model.Zug;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,5 +31,11 @@ public class LinieService {
 
     public Linie linieById(Long id) throws SQLException {
         return linieDao.queryForId(id);
+    }
+
+    public List<Zug> alleZugen(Long id) throws SQLException {
+        Linie linie = linieDao.queryForId(id);
+        if (linie == null) throw new SQLException("Linie mit ID " + id + " nicht gefunden");
+        return new ArrayList<>(linie.getZuege());
     }
 }
