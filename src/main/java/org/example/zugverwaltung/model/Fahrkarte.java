@@ -22,7 +22,7 @@ public class Fahrkarte {
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "fahrgast_id")
     private Fahrgast fahrgast;
 
-    @DatabaseField(columnName = "abfahrtszeit", persisterClass = LocalDateTimePersister.class)
+    @DatabaseField(columnName = "abfahrtszeit", persisterClass = LocalDateTimePersister.class, width = 30)
     private LocalDateTime abfahrtszeit;
 
     public Fahrkarte() {
